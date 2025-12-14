@@ -3,30 +3,28 @@ import pandas as pd
 import os
 
 # Konfiguracja strony
-st.set_page_config(page_title="Magazyn", page_icon="📦")
+st.set_page_config(page_title="Magazyn", page_icon="🦆")
 
-# --- CSS: TŁO I STYL ---
-# Tutaj dzieje się magia z tłem. Używamy SVG (grafiki wektorowej) w kodzie,
-# aby narysować serduszka bez zewnętrznych plików.
+# --- CSS: TŁO W KACZKI ---
 st.markdown(
     """
     <style>
     .stApp {
-        /* Kolor tła: Jasny fiolet (Lavender) */
-        background-color: #E6E6FA;
+        /* Kolor tła: Jasny błękit (jak woda dla kaczek) */
+        background-color: #E0F7FA;
         
-        /* Wzorek w serduszka (zakodowany obrazek SVG) */
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='%23FF69B4' fill-opacity='0.4'/%3E%3C/svg%3E");
+        /* Wzorek w kaczki (używamy emoji kaczki jako SVG) */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Ctext y='50%25' x='50%25' dy='.3em' text-anchor='middle' font-size='50'%3E🦆%3C/text%3E%3C/svg%3E");
         
-        /* Rozmiar i powtarzanie wzorka */
-        background-size: 60px 60px;
+        /* Rozmiar powtarzania */
+        background-size: 80px 80px;
     }
     
-    /* Opcjonalnie: Białe tło pod tabelką, żeby była czytelna na tle serduszek */
-    .stDataFrame, .stForm {
-        background-color: rgba(255, 255, 255, 0.8);
+    /* Białe, półprzezroczyste tło pod elementami, żeby tekst był czytelny */
+    .stDataFrame, .stForm, div[data-testid="stSidebar"] {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
         padding: 10px;
-        border-radius: 10px;
     }
     </style>
     """,
@@ -56,7 +54,7 @@ with st.sidebar.form("add_form", clear_on_submit=True):
         new_row = pd.DataFrame({"Produkt": [new_product], "Ilość": [new_qty]})
         df = pd.concat([df, new_row], ignore_index=True)
         df.to_csv(DATA_FILE, index=False)
-        st.sidebar.success("Dodano!")
+        st.sidebar.success("Kaczka dodała towar! 🦆")
         st.rerun()
 
 # --- KROK 3: Wyświetlanie danych ---
