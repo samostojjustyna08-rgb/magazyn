@@ -2,9 +2,26 @@ import streamlit as st
 import pandas as pd
 import os
 
-# Konfiguracja strony
+# Konfiguracja strony (musi być pierwszą komendą Streamlit)
 st.set_page_config(page_title="Magazyn (Bez Sesji)", page_icon="📦")
-st.title("📦 Prosty Magazyn (Bez Session State)")
+
+# --- NOWE: Wstrzyknięcie CSS dla różowego tła ---
+# Używamy st.markdown z unsafe_allow_html=True, aby dodać własne style CSS.
+# .stApp to klasa głównego kontenera aplikacji w Streamlit.
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #ffb6c1; /* Jasnoróżowy (LightPink) dla lepszej czytelności */
+        /* Jeśli wolisz bardzo intensywny róż, zamień powyższą linię na: background-color: pink; */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# --- ZMIANA: Zaktualizowany tytuł z większą ilością kartonów ---
+st.title("📦📦📦 Prosty Magazyn (Bez Session State) 📦📦📦")
 
 # Nazwa pliku z danymi
 DATA_FILE = "magazyn.csv"
@@ -17,6 +34,8 @@ else:
     df = pd.DataFrame(columns=["Produkt", "Ilość"])
 
 # --- KROK 2: Sekcja Dodawania (Panel Boczny) ---
+# Zmiana koloru tła wpływa głównie na główną część, panel boczny
+# w domyślnym motywie Streamlit pozostaje lekko szary, co daje dobry kontrast.
 st.sidebar.header("Dodaj nowy towar")
 with st.sidebar.form("add_form", clear_on_submit=True):
     new_product = st.text_input("Nazwa produktu")
